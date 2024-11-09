@@ -12,6 +12,11 @@ import { RegisterComponent } from './pages/register/register.component';
 import { MainNavBarComponent } from './components/main-nav-bar/main-nav-bar.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { LandingPageNavBarComponent } from './components/landing-page-nav-bar/landing-page-nav-bar.component';
+import {
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -24,13 +29,10 @@ import { LandingPageNavBarComponent } from './components/landing-page-nav-bar/la
     RegisterComponent,
     MainNavBarComponent,
     ProfileComponent,
-    LandingPageNavBarComponent
+    LandingPageNavBarComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+  imports: [BrowserModule, AppRoutingModule, FormsModule],
+  providers: [provideHttpClient(withInterceptorsFromDi())],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
