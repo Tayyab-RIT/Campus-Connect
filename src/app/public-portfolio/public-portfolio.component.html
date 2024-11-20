@@ -1,0 +1,94 @@
+<div *ngIf="isLoading" class="text-gray-500 text-center py-6">Loading profile...</div>
+
+<div *ngIf="!isLoading && profileData" class="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg">
+    <!-- Profile Header -->
+    <div class="flex items-center space-x-6">
+        <img *ngIf="profileData.profile_picture" [src]="profileData.profile_picture" alt="{{ profileData.full_name }}"
+            class="w-24 h-24 rounded-full shadow-md" />
+        <div>
+            <h1 class="text-3xl font-bold text-gray-800">{{ profileData.full_name }}</h1>
+            <p class="text-gray-600 text-sm">{{ profileData.username }}</p>
+            <p class="mt-2 text-sm text-orange-500 font-semibold">
+                {{ profileData.degree_program }}, Year {{ profileData.year_of_study }}
+            </p>
+            <p *ngIf="profileData.gpa" class="text-sm text-gray-700 mt-1">GPA: {{ profileData.gpa }}</p>
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <div class="mt-8">
+        <h2 class="text-xl font-semibold text-orange-500">About</h2>
+        <p class="text-gray-700 mt-2">{{ profileData.experience || 'No experience listed yet.' }}</p>
+    </div>
+
+    <!-- Skills Section -->
+    <div class="mt-8">
+        <h2 class="text-xl font-semibold text-orange-500">Skills</h2>
+        <div *ngIf="profileData.skills && profileData.skills.length > 0" class="flex flex-wrap gap-2 mt-2">
+            <span *ngFor="let skill of profileData.skills"
+                class="bg-orange-100 text-orange-800 text-sm font-medium py-1 px-3 rounded-full shadow-sm">
+                {{ skill }}
+            </span>
+        </div>
+        <p *ngIf="!profileData.skills || profileData.skills.length === 0" class="text-gray-500">No skills listed.</p>
+    </div>
+
+    <!-- Certifications Section -->
+    <div class="mt-8">
+        <h2 class="text-xl font-semibold text-orange-500">Certifications</h2>
+        <ul *ngIf="profileData.certifications && profileData.certifications.length > 0"
+            class="list-disc list-inside mt-2">
+            <li *ngFor="let cert of profileData.certifications" class="text-gray-700">{{ cert }}</li>
+        </ul>
+        <p *ngIf="!profileData.certifications || profileData.certifications.length === 0" class="text-gray-500">
+            No certifications listed.
+        </p>
+    </div>
+
+    <!-- Social Links -->
+    <div class="mt-8">
+        <h2 class="text-xl font-semibold text-orange-500">Social Links</h2>
+        <ul class="mt-2 space-y-2">
+            <li *ngIf="profileData.linkedin_url">
+                <a [href]="profileData.linkedin_url" target="_blank"
+                    class="text-orange-500 hover:underline flex items-center">
+                    LinkedIn
+                </a>
+            </li>
+            <li *ngIf="profileData.github_url">
+                <a [href]="profileData.github_url" target="_blank"
+                    class="text-orange-500 hover:underline flex items-center">
+                    GitHub
+                </a>
+            </li>
+            <li *ngIf="profileData.twitter_url">
+                <a [href]="profileData.twitter_url" target="_blank"
+                    class="text-orange-500 hover:underline flex items-center">
+                    Twitter
+                </a>
+            </li>
+            <li *ngIf="profileData.instagram_url">
+                <a [href]="profileData.instagram_url" target="_blank"
+                    class="text-orange-500 hover:underline flex items-center">
+                    Instagram
+                </a>
+            </li>
+            <li *ngIf="profileData.portfolio_url">
+                <a [href]="profileData.portfolio_url" target="_blank"
+                    class="text-orange-500 hover:underline flex items-center">
+                    Portfolio
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Tutoring Status -->
+    <div class="mt-8">
+        <h2 class="text-xl font-semibold text-orange-500">Tutoring Status</h2>
+        <p class="text-gray-700 mt-2">
+            {{ profileData.is_tutor ? 'Available for tutoring sessions!' : 'Not available for tutoring.' }}
+        </p>
+    </div>
+</div>
+
+<div *ngIf="errorMessage" class="text-red-500 text-center mt-4">{{ errorMessage }}</div>

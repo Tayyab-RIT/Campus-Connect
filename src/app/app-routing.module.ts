@@ -9,8 +9,10 @@ import { HomeComponent } from './pages/home/home.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { authGuard } from './auth.guard';
 import { authRedirectGuard } from './auth-redirect.guard';
+import { PublicPortfolioComponent } from './public-portfolio/public-portfolio.component';
 
 const routes: Routes = [
+  { path: 'profile/:username', component: PublicPortfolioComponent }, // Dynamic route
   {
     path: '',
     component: LandingLayoutComponent,

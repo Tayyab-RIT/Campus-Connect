@@ -35,6 +35,21 @@ export class ProfileComponent implements OnInit {
   }
 
   saveProfile() {
-    console.log('Profile saved');
+    this.isSaving = true; // Set saving state
+    this.authService.saveProfile(this.profileData).subscribe({
+      next: (response) => {
+        console.log('Profile saved successfully:', response);
+      },
+      error: (error) => {
+        console.error('Error saving profile:', error);
+        this.errorMessage =
+          error.error?.message ||
+          'Failed to save profile. Please try again later.';
+      },
+      complete: () => {
+        this.isSaving = false; // Turn off saving state
+        alert('Profile saved successfully!');
+      },
+    });
   }
 }

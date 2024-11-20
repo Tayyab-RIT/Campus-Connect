@@ -17,6 +17,7 @@ import {
   withInterceptorsFromDi,
 } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { PublicPortfolioComponent } from './public-portfolio/public-portfolio.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { FormsModule } from '@angular/forms';
     MainNavBarComponent,
     ProfileComponent,
     LandingPageNavBarComponent,
+    PublicPortfolioComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [provideHttpClient(withInterceptorsFromDi())],

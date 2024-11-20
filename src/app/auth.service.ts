@@ -55,6 +55,26 @@ export class AuthService {
     );
   }
 
+  saveProfile(profileData: any): Observable<any> {
+    return this.http
+      .put(`${this.apiUrl}/profile`, profileData, {
+        headers: this.getAuthHeaders(),
+      })
+      .pipe(
+        tap((response: any) => {
+          console.log('Profile saved:', response);
+        })
+      );
+  }
+
+  getProfileByUsername(username: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/profile/${username}`).pipe(
+      tap((response: any) => {
+        console.log('User profile:', response);
+      })
+    );
+  }
+
   /**
    * Logs out the user and clears the token
    */
