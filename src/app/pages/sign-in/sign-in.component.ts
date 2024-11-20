@@ -16,6 +16,10 @@ export class SignInComponent {
   constructor(private authService: AuthService, private router: Router) {}
 
   onLogIn() {
+    if (!this.email || !this.password) {
+      this.errorMessage = 'Please fill in all fields';
+      return;
+    }
     this.authService.login(this.email, this.password).subscribe({
       next: (response) => {
         console.log('Sign-in successful', response);

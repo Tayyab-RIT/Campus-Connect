@@ -18,12 +18,14 @@ export class AuthService {
    * @param password User's password
    * @returns Observable with user information
    */
-  register(email: string, password: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/register`, { email, password }).pipe(
-      tap((response: any) => {
-        console.log('User registered:', response);
-      })
-    );
+  register(fullName: string, email: string, password: string): Observable<any> {
+    return this.http
+      .post(`${this.apiUrl}/register`, { fullName, email, password })
+      .pipe(
+        tap((response: any) => {
+          console.log('User registered:', response);
+        })
+      );
   }
 
   /**
@@ -41,6 +43,14 @@ export class AuthService {
           localStorage.setItem('token', this.token!); // Persist token in local storage
           console.log('User logged in:', response);
         }
+      })
+    );
+  }
+
+  getProfile(): Observable<any> {
+    return this.getProtectedResource(`${this.apiUrl}/profile`).pipe(
+      tap((response: any) => {
+        console.log('User profile:', response);
       })
     );
   }
