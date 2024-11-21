@@ -1,0 +1,67 @@
+<div class="max-w-4xl mx-auto mt-6 space-y-6">
+    <!-- Post Card -->
+    <div *ngFor="let post of posts" class="bg-white shadow-md rounded-lg p-6 border border-gray-200">
+        <!-- Post Header -->
+        <div class="flex items-start space-x-4">
+            <div>
+                <h2 class="text-lg font-bold text-gray-800">User: {{ post.user_id }}</h2>
+                <p class="text-sm text-gray-500">
+                    Posted on {{ post.created_at | date: 'medium' }}
+                </p>
+            </div>
+        </div>
+
+        <!-- Post Content -->
+        <div class="mt-4">
+            <p class="text-gray-700 leading-relaxed">{{ post.content }}</p>
+            <img *ngIf="post.image" [src]="'data:image/jpeg;base64,' + post.image" alt="Post Image"
+                class="mt-4 w-40 rounded-lg shadow-sm" />
+        </div>
+
+        <!-- Likes and Comments Section -->
+        <div class="mt-6 flex items-center justify-between">
+            <!-- Likes -->
+            <div class="flex items-center space-x-2 text-gray-600">
+                <button (click)="toggleLike(post.id)" class="flex items-center space-x-1 hover:text-orange-500">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="currentColor"
+                        [class.fill-orange-500]="post.likedByUser" viewBox="0 0 24 24">
+                        <path
+                            d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                    </svg>
+                    <span>{{ post.like?.length || 0 }}</span>
+                </button>
+            </div>
+
+            <!-- Comments -->
+            <div>
+                <span class="text-gray-600 text-sm">
+                    {{ post.comment?.length || 0 }} Comments
+                </span>
+            </div>
+        </div>
+
+        <!-- Comment Section -->
+        <div class="mt-6">
+            <h3 class="text-orange-500 font-semibold">Comments</h3>
+            <ul class="mt-4 space-y-3">
+                <li *ngFor="let comment of post.comment" class="bg-gray-100 p-3 rounded-lg shadow-sm">
+                    <p class="text-gray-800 text-sm">{{ comment.content }}</p>
+                    <p class="text-xs text-gray-500 mt-1">
+                        - {{ comment.user_id }}, {{ comment.created_at | date: 'short' }}
+                    </p>
+                </li>
+            </ul>
+
+            <!-- Add a Comment -->
+            <div class="mt-4 flex">
+                <input type="text" placeholder="Add a comment..."
+                    class="flex-grow border border-gray-300 rounded-l-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                    #commentInput />
+                <button class="bg-orange-500 text-white px-4 py-2 rounded-r-lg"
+                    (click)="addComment(post.id, commentInput.value); commentInput.value = ''">
+                    Post
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
