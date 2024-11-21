@@ -44,13 +44,21 @@
         <div class="mt-6">
             <h3 class="text-orange-500 font-semibold">Comments</h3>
             <ul class="mt-4 space-y-3">
-                <li *ngFor="let comment of post.comment" class="bg-gray-100 p-3 rounded-lg shadow-sm">
+                <!-- Show only the first two comments by default -->
+                <li *ngFor="let comment of post.visibleComments" class="bg-gray-100 p-3 rounded-lg shadow-sm">
                     <p class="text-gray-800 text-sm">{{ comment.content }}</p>
                     <p class="text-xs text-gray-500 mt-1">
                         - {{ comment.user_id }}, {{ comment.created_at | date: 'short' }}
                     </p>
                 </li>
             </ul>
+
+            <!-- Show More Button -->
+            <div *ngIf="post.comment?.length > post.visibleComments.length" class="mt-2">
+                <button class="text-orange-500 font-semibold hover:underline" (click)="showMoreComments(post)">
+                    Show More
+                </button>
+            </div>
 
             <!-- Add a Comment -->
             <div class="mt-4 flex">
@@ -63,6 +71,5 @@
                 </button>
             </div>
         </div>
-
     </div>
 </div>

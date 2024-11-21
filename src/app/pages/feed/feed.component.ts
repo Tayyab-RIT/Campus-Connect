@@ -45,6 +45,7 @@ export class FeedComponent implements OnInit {
               likedByUser: post.like?.some(
                 (like: { user_id: string }) => like.user_id === userId
               ),
+              visibleComments: post.comment.slice(0, 2), // Only show the first two comments initially
             }));
             console.log('Feed fetched successfully:', this.posts);
           },
@@ -63,6 +64,13 @@ export class FeedComponent implements OnInit {
         this.isLoading = false;
       },
     });
+  }
+
+  // Show more comments for a specific post
+  showMoreComments(post: any) {
+    const currentLength = post.visibleComments.length;
+    const moreComments = post.comment.slice(currentLength, currentLength + 2); // Load 2 more comments
+    post.visibleComments = [...post.visibleComments, ...moreComments];
   }
 
   toggleLike(postId: string) {
