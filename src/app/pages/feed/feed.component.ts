@@ -123,7 +123,35 @@ export class FeedComponent implements OnInit {
     return false;
   }
 
-  addComment(post: any, comment: string) {
-    return null; // Implement this method
+  addComment(postId: string, commentContent: string) {
+    if (!commentContent.trim()) {
+      console.error('Comment cannot be empty');
+      return;
+    }
+
+    this.auth.addComment(postId, commentContent).subscribe({
+      next: (newComment) => {
+        const post = this.posts.find((p) => p.id === postId);
+        if (post) {
+          console.log('POST COMMENTS IS', post.comment);
+          console.log('NEW COMEMNT IS', newComment);
+
+          // Add the new comment to the comments array with the correct structure
+          post.comment = [
+            ...post.comment,
+            {
+              id: newComment.data.id, // Use the ID returned by the backend
+              user_id: newComment.data.user_id, // Ensure user_id is included
+              content: commentContent, // Use the submitted content
+              created_at: new Date().toISOString(), // Add the current timestamp
+            },
+          ];
+          console.log(`Comment added to post ${postId}`);
+        }
+      },
+      error: (error) => {
+        console.error('Error adding comment:', error);
+      },
+    });
   }
 }

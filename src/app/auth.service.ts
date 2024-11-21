@@ -153,4 +153,17 @@ export class AuthService {
         })
       );
   }
+  addComment(postId: string, content: string): Observable<any> {
+    return this.http
+      .post(
+        `${this.apiUrl}/comment/${postId}`,
+        { content },
+        { headers: this.getAuthHeaders() }
+      )
+      .pipe(
+        tap((response: any) => {
+          console.log('Comment added:', response);
+        })
+      );
+  }
 }
