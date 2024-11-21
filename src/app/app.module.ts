@@ -19,6 +19,7 @@ import {
 import { FormsModule } from '@angular/forms';
 import { PublicPortfolioComponent } from './public-portfolio/public-portfolio.component';
 import { FeedComponent } from './pages/feed/feed.component';
+import { TutoringComponent } from './pages/tutoring/tutoring.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { FeedComponent } from './pages/feed/feed.component';
     LandingPageNavBarComponent,
     PublicPortfolioComponent,
     FeedComponent,
+    TutoringComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [provideHttpClient(withInterceptorsFromDi())],

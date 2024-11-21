@@ -11,6 +11,7 @@ import { authGuard } from './auth.guard';
 import { authRedirectGuard } from './auth-redirect.guard';
 import { PublicPortfolioComponent } from './public-portfolio/public-portfolio.component';
 import { FeedComponent } from './pages/feed/feed.component';
+import { TutoringComponent } from './pages/tutoring/tutoring.component';
 
 const routes: Routes = [
   { path: 'profile/:username', component: PublicPortfolioComponent }, // Dynamic route
@@ -36,6 +37,11 @@ const routes: Routes = [
     component: MainLayoutComponent,
     children: [
       {
+        path: 'tutoring',
+        component: TutoringComponent,
+        canActivate: [authGuard],
+      },
+      {
         path: 'feed/:page',
         component: FeedComponent,
         canActivate: [authGuard],
@@ -48,7 +54,7 @@ const routes: Routes = [
       },
     ],
   },
-  { path: '**', redirectTo: 'home' },
+  { path: '**', redirectTo: 'feed/1' },
 ];
 
 @NgModule({

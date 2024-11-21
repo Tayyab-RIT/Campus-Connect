@@ -166,4 +166,38 @@ export class AuthService {
         })
       );
   }
+
+  getTutorSlots(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/tutor/slots`, {
+      headers: this.getAuthHeaders(),
+    });
+  }
+
+  addTutorSlot(slot: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/tutor/slots`, slot, {
+      headers: this.getAuthHeaders(),
+    });
+  }
+
+  bookTutorSlot(slotId: string): Observable<any> {
+    return this.http.post(
+      `${this.apiUrl}/tutor/book`,
+      { slot_id: slotId },
+      { headers: this.getAuthHeaders() }
+    );
+  }
+
+  becomeTutor(): Observable<any> {
+    return this.http
+      .post(
+        `${this.apiUrl}/become-tutor`,
+        {},
+        { headers: this.getAuthHeaders() }
+      )
+      .pipe(
+        tap((response: any) => {
+          console.log('User is now a tutor:', response);
+        })
+      );
+  }
 }

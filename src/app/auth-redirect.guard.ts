@@ -8,7 +8,7 @@ export const authRedirectGuard: CanActivateFn = (route, state) => {
 
   if (authService.isAuthenticated()) {
     // Redirect authenticated users to the home page (or any other protected page)
-    router.navigate(['/home']);
+    router.navigate(['/feed/1']);
     return false;
   }
   return true;

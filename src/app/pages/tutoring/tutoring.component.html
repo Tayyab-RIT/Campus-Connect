@@ -1,0 +1,76 @@
+<div class="max-w-6xl mx-auto mt-6">
+    <!-- Title -->
+    <h1 class="text-3xl font-bold text-center text-gray-800 mb-8">Tutoring</h1>
+
+    <!-- Become a Tutor -->
+    <div *ngIf="!isTutor" class="mb-12 text-center">
+        <button class="bg-orange-500 text-white px-6 py-3 rounded-lg hover:bg-orange-600" (click)="becomeTutor()">
+            Become a Tutor
+        </button>
+    </div>
+
+    <!-- Tutor Section: Add Slot -->
+    <div *ngIf="isTutor" class="mb-12 bg-gray-100 p-6 rounded-lg shadow-md">
+        <h2 class="text-lg font-semibold text-gray-700 mb-4">Create a Tutoring Slot</h2>
+        <form (ngSubmit)="createSlot()">
+            <div class="grid grid-cols-2 gap-4">
+                <!-- Topic -->
+                <div>
+                    <label for="topic" class="block text-sm font-medium text-gray-600 mb-1">Topic</label>
+                    <input type="text" id="topic" [(ngModel)]="newSlot.topic" name="topic"
+                        class="block w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-orange-500"
+                        placeholder="e.g., Math - Algebra" required />
+                </div>
+                <!-- Date -->
+                <div>
+                    <label for="date" class="block text-sm font-medium text-gray-600 mb-1">Date</label>
+                    <input type="date" id="date" [(ngModel)]="newSlot.date" name="date"
+                        class="block w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-orange-500"
+                        required />
+                </div>
+                <!-- Time -->
+                <div>
+                    <label for="time" class="block text-sm font-medium text-gray-600 mb-1">Time</label>
+                    <input type="time" id="time" [(ngModel)]="newSlot.time" name="time"
+                        class="block w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-orange-500"
+                        required />
+                </div>
+                <!-- Duration -->
+                <div>
+                    <label for="duration" class="block text-sm font-medium text-gray-600 mb-1">Duration
+                        (minutes)</label>
+                    <input type="number" id="duration" [(ngModel)]="newSlot.duration" name="duration"
+                        class="block w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-orange-500"
+                        required />
+                </div>
+                <!-- Max Students -->
+                <div>
+                    <label for="max_students" class="block text-sm font-medium text-gray-600 mb-1">Max Students</label>
+                    <input type="number" id="max_students" [(ngModel)]="newSlot.max_students" name="max_students"
+                        class="block w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-orange-500"
+                        required />
+                </div>
+            </div>
+            <button type="submit" class="bg-orange-500 text-white px-6 py-2 rounded-lg mt-6 hover:bg-orange-600">
+                Create Slot
+            </button>
+        </form>
+    </div>
+
+    <!-- Available Slots -->
+    <h2 class="text-2xl font-semibold text-gray-700 mb-4">Available Slots</h2>
+    <div *ngIf="slots.length > 0" class="space-y-6">
+        <div *ngFor="let slot of slots" class="p-6 bg-white border border-gray-200 rounded-lg shadow-md">
+            <h3 class="text-lg font-bold text-gray-800 mb-2">{{ slot.topic }}</h3>
+            <p class="text-sm text-gray-600">Date: {{ slot.date }}</p>
+            <p class="text-sm text-gray-600">Time: {{ slot.time }}</p>
+            <p class="text-sm text-gray-600">Duration: {{ slot.duration }} minutes</p>
+            <p class="text-sm text-gray-600">Available Slots: {{ slot.max_students - slot.current_students }}</p>
+            <button class="bg-orange-500 text-white px-4 py-2 rounded-lg mt-4 hover:bg-orange-600"
+                (click)="bookSlot(slot.id)" [disabled]="isTutor || slot.current_students >= slot.max_students">
+                Book Slot
+            </button>
+        </div>
+    </div>
+    <p *ngIf="slots.length === 0" class="text-center text-gray-500">No available slots at the moment.</p>
+</div>
