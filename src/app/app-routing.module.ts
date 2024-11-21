@@ -10,6 +10,7 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { authGuard } from './auth.guard';
 import { authRedirectGuard } from './auth-redirect.guard';
 import { PublicPortfolioComponent } from './public-portfolio/public-portfolio.component';
+import { FeedComponent } from './pages/feed/feed.component';
 
 const routes: Routes = [
   { path: 'profile/:username', component: PublicPortfolioComponent }, // Dynamic route
@@ -34,6 +35,11 @@ const routes: Routes = [
     path: '',
     component: MainLayoutComponent,
     children: [
+      {
+        path: 'feed/:page',
+        component: FeedComponent,
+        canActivate: [authGuard],
+      },
       { path: 'home', component: HomeComponent, canActivate: [authGuard] },
       {
         path: 'profile',

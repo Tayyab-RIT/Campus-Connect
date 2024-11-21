@@ -67,12 +67,32 @@ export class AuthService {
       );
   }
 
+  getUser(): Observable<any> {
+    return this.getProtectedResource(`${this.apiUrl}/current-user`).pipe(
+      tap((response: any) => {
+        console.log('User:', response);
+      })
+    );
+  }
+
   getProfileByUsername(username: string): Observable<any> {
     return this.http.get(`${this.apiUrl}/profile/${username}`).pipe(
       tap((response: any) => {
         console.log('User profile:', response);
       })
     );
+  }
+
+  removeLike(postId: string): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/like/${postId}`, {
+      headers: this.getAuthHeaders(),
+    });
+  }
+
+  addLike(postId: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/like/${postId}`, null, {
+      headers: this.getAuthHeaders(),
+    });
   }
 
   /**
@@ -122,5 +142,15 @@ export class AuthService {
    */
   getProtectedResource(url: string): Observable<any> {
     return this.http.get(url, { headers: this.getAuthHeaders() });
+  }
+
+  getFeed(page: number, filter: string | null): Observable<any> {
+    return this.http
+      .get(`${this.apiUrl}/feed?page=${page}&filter=${filter}`)
+      .pipe(
+        tap((response: any) => {
+          console.log('Feed loaded:', response);
+        })
+      );
   }
 }

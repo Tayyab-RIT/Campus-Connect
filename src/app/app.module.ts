@@ -18,6 +18,7 @@ import {
 } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { PublicPortfolioComponent } from './public-portfolio/public-portfolio.component';
+import { FeedComponent } from './pages/feed/feed.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { PublicPortfolioComponent } from './public-portfolio/public-portfolio.co
     ProfileComponent,
     LandingPageNavBarComponent,
     PublicPortfolioComponent,
+    FeedComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [provideHttpClient(withInterceptorsFromDi())],
