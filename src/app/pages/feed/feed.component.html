@@ -1,4 +1,14 @@
 <div class="max-w-4xl mx-auto mt-6 space-y-6">
+    <!-- Search Bar -->
+    <form class="mb-6" (submit)="onSearch(searchInput.value)">
+        <div class="flex">
+            <input #searchInput type="text" placeholder="Search posts..."
+                class="flex-grow border border-gray-300 rounded-l-lg px-4 py-2 focus:ring-2 focus:ring-orange-500" />
+            <button type="submit" class="bg-orange-500 text-white px-4 py-2 rounded-r-lg hover:bg-orange-600">
+                Search
+            </button>
+        </div>
+    </form>
     <!-- Post Card -->
     <div *ngFor="let post of posts" class="bg-white shadow-md rounded-lg p-6 border border-gray-200">
         <!-- Post Header -->

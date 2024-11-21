@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../auth.service';
 
 @Component({
@@ -14,7 +14,11 @@ export class FeedComponent implements OnInit {
   page: number = 1;
   filter: string | null = null;
 
-  constructor(private route: ActivatedRoute, private auth: AuthService) {}
+  constructor(
+    private route: ActivatedRoute,
+    private auth: AuthService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     // Listen to route parameter and query parameter changes
@@ -161,5 +165,9 @@ export class FeedComponent implements OnInit {
         console.error('Error adding comment:', error);
       },
     });
+  }
+
+  onSearch(filter: string) {
+    this.router.navigate(['/feed', 1], { queryParams: { filter } });
   }
 }

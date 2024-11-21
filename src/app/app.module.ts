@@ -20,6 +20,7 @@ import { FormsModule } from '@angular/forms';
 import { PublicPortfolioComponent } from './public-portfolio/public-portfolio.component';
 import { FeedComponent } from './pages/feed/feed.component';
 import { TutoringComponent } from './pages/tutoring/tutoring.component';
+import { ServicesComponent } from './pages/services/services.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { TutoringComponent } from './pages/tutoring/tutoring.component';
     PublicPortfolioComponent,
     FeedComponent,
     TutoringComponent,
+    ServicesComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [provideHttpClient(withInterceptorsFromDi())],
