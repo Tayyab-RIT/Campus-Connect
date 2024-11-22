@@ -146,7 +146,9 @@ export class AuthService {
 
   getFeed(page: number, filter: string | null): Observable<any> {
     return this.http
-      .get(`${this.apiUrl}/feed?page=${page}&filter=${filter}`)
+      .get(`${this.apiUrl}/feed?page=${page}&filter=${filter}`, {
+        headers: this.getAuthHeaders(),
+      })
       .pipe(
         tap((response: any) => {
           console.log('Feed loaded:', response);

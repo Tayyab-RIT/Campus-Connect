@@ -20,6 +20,8 @@ export class FeedComponent implements OnInit {
   newPostContent: string = '';
   newPostImage: File | null = null;
 
+  userId = '';
+
   constructor(
     private route: ActivatedRoute,
     private auth: AuthService,
@@ -39,6 +41,7 @@ export class FeedComponent implements OnInit {
     this.auth.getUser().subscribe({
       next: (user) => {
         this.isAdmin = user.data.is_admin;
+        this.userId = user.data.user_id;
       },
       error: (error) => {
         console.error('Error checking admin status:', error);
@@ -48,28 +51,15 @@ export class FeedComponent implements OnInit {
 
   async loadFeed() {
     this.isLoading = true;
-    this.filter = this.filter || null; // Set filter to null if it's undefined
 
     this.auth.getFeed(this.page, this.filter).subscribe({
       next: (feed) => {
-        this.auth.getUser().subscribe({
-          next: (user) => {
-            const userId = user.data.id;
+        this.posts = feed.data.map((post: any) => ({
+          ...post,
+          visibleComments: post.comment.slice(0, 2), // Show only the first two comments initially
+        }));
 
-            // Map posts and calculate `likedByUser`
-            this.posts = feed.data.map((post: any) => ({
-              ...post,
-              likedByUser: post.like?.some(
-                (like: { user_id: string }) => like.user_id === userId
-              ),
-              visibleComments: post.comment.slice(0, 2), // Only show the first two comments initially
-            }));
-            console.log('Feed fetched successfully:', this.posts);
-          },
-          error: (error) => {
-            console.error('Error fetching user ID:', error);
-          },
-        });
+        console.log('Feed fetched successfully:', this.posts);
       },
       error: (error) => {
         console.error('Error fetching feed:', error);
@@ -138,40 +128,34 @@ export class FeedComponent implements OnInit {
   }
 
   toggleLike(postId: string) {
-    this.auth.getUser().subscribe({
-      next: (user) => {
-        const userId = user.data.id;
-        const post = this.posts.find((p) => p.id === postId);
-        if (!post) return;
+    const post = this.posts.find((p) => p.id === postId);
+    if (!post) return;
 
-        if (post.likedByUser) {
-          this.auth.removeLike(postId).subscribe({
-            next: () => {
-              post.likedByUser = false;
-              post.like = post.like.filter(
-                (like: { user_id: any }) => like.user_id !== userId
-              );
-            },
-            error: (error) => {
-              console.error('Error removing like:', error);
-            },
-          });
-        } else {
-          this.auth.addLike(postId).subscribe({
-            next: () => {
-              post.likedByUser = true;
-              post.like = [...post.like, { user_id: userId }];
-            },
-            error: (error) => {
-              console.error('Error adding like:', error);
-            },
-          });
-        }
-      },
-      error: (error) => {
-        console.error('Error fetching user ID:', error);
-      },
-    });
+    if (post.likedByUser) {
+      // Remove like
+      this.auth.removeLike(postId).subscribe({
+        next: () => {
+          post.likedByUser = false;
+          post.like = post.like.filter(
+            (like: { user_id: any }) => like.user_id !== this.userId
+          );
+        },
+        error: (error) => {
+          console.error('Error removing like:', error);
+        },
+      });
+    } else {
+      // Add like
+      this.auth.addLike(postId).subscribe({
+        next: () => {
+          post.likedByUser = true;
+          post.like = [...post.like, { user_id: this.userId }];
+        },
+        error: (error) => {
+          console.error('Error adding like:', error);
+        },
+      });
+    }
   }
 
   addComment(postId: string, commentContent: string) {

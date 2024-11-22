@@ -29,7 +29,21 @@ export class PublicPortfolioComponent implements OnInit {
     this.auth.getProfileByUsername(username).subscribe({
       next: (profile) => {
         this.profileData = profile.data;
-        console.log('Profile data:', profile);
+
+        // Ensure 'skills' and 'certifications' are arrays
+        if (typeof this.profileData.skills === 'string') {
+          this.profileData.skills = this.profileData.skills
+            .split(',')
+            .map((skill: string) => skill.trim());
+        }
+
+        if (typeof this.profileData.certifications === 'string') {
+          this.profileData.certifications = this.profileData.certifications
+            .split(',')
+            .map((cert: string) => cert.trim());
+        }
+
+        console.log('Profile data:', this.profileData);
       },
       error: (error) => {
         console.error('Error fetching profile:', error);
