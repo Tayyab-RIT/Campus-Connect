@@ -1,12 +1,16 @@
 <header class="navbar">
   <div class="logo">CampusConnect</div>
   <nav class="nav-links">
-    <ul>
+    <ul class="flex space-x-6">
       <li><a href="/feed/1">Home</a></li>
       <li><a href="/feed/1?filter=job">Jobs/Co-op</a></li>
       <li><a href="/tutoring">Tutoring</a></li>
       <li><a href="/services">Services</a></li>
       <li><a href="/profile">Profile</a></li>
+      <li (click)="logout()" class="hover:cursor-pointer">
+        Logout
+      </li>
     </ul>
   </nav>
+  <!-- Logout Button -->
 </header>

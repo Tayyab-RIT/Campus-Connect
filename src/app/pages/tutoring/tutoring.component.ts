@@ -86,8 +86,12 @@ export class TutoringComponent implements OnInit {
           duration: 0,
           max_students: 0,
         };
+        alert('Slot created successfully!');
       },
-      error: (err) => console.error(err),
+      error: (err) => {
+        console.error(err);
+        alert(err.error.error || 'Failed to create slot. Please try again.');
+      },
     });
   }
 

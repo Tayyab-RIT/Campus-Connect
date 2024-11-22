@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../auth.service';
+import { combineLatest } from 'rxjs';
 
 @Component({
   selector: 'app-feed',
@@ -26,15 +27,13 @@ export class FeedComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.route.params.subscribe((params) => {
-      this.page = +params['page']; // Get the page number
-      this.loadFeed();
-    });
-
-    this.route.queryParams.subscribe((queryParams) => {
-      this.filter = queryParams['filter']; // Get the filter value
-      this.loadFeed();
-    });
+    combineLatest([this.route.params, this.route.queryParams]).subscribe(
+      ([params, queryParams]) => {
+        this.page = +params['page'] || 1; // Get the page number or default to 1
+        this.filter = queryParams['filter'] || null; // Get the filter value or set it to null
+        this.loadFeed();
+      }
+    );
 
     // Check if the user is an admin
     this.auth.getUser().subscribe({
@@ -226,5 +225,12 @@ export class FeedComponent implements OnInit {
         },
       });
     }
+  }
+
+  changePage(newPage: number) {
+    if (newPage < 1) return; // Ensure the page number is valid
+    this.router.navigate(['/feed', newPage], {
+      queryParams: { filter: this.filter },
+    });
   }
 }

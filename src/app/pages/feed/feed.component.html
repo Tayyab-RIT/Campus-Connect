@@ -1,4 +1,10 @@
-<div class="max-w-4xl mx-auto mt-6 space-y-6">
+<div class="max-w-4xl mx-auto mt-6 space-y-6 mb-12">
+    <div *ngIf="isLoading" class="flex justify-center items-center">
+        <div class="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full text-orange-500"
+            role="status">
+            <span class="visually-hidden"></span>
+        </div>
+    </div>
     <div *ngIf="isAdmin" class="bg-gray-100 p-6 rounded-lg mb-6">
         <h2 class="text-lg font-bold text-gray-700 mb-4">Create a New Post</h2>
         <form (submit)="createPost()">
@@ -25,14 +31,13 @@
         <!-- Post Header -->
         <div class="flex items-start space-x-4">
             <div>
-                <h2 class="text-lg font-bold text-gray-800">User: {{ post.user_id }}</h2>
+                <!-- <h2 class="text-lg font-bold text-gray-800">User: {{ post.user_data.full_name }}</h2> -->
                 <p class="text-sm text-gray-500">Posted on {{ post.created_at | date: 'medium' }}</p>
             </div>
             <!-- Delete Button (Visible only to Admins) -->
             <div *ngIf="isAdmin" class="ml-auto">
-                <button (click)="deletePost(post.id)"
-                    class="text-white rounded-lg ml-40 hover:bg-gray-200 absolute right-12">
-                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="40" viewBox="0 0 32 32">
+                <button (click)="deletePost(post.id)" class="text-white rounded-lg hover:bg-gray-200 absolute right-12">
+                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="30" viewBox="0 0 32 32">
                         <path
                             d="M 15 4 C 14.476563 4 13.941406 4.183594 13.5625 4.5625 C 13.183594 4.941406 13 5.476563 13 6 L 13 7 L 7 7 L 7 9 L 8 9 L 8 25 C 8 26.644531 9.355469 28 11 28 L 23 28 C 24.644531 28 26 26.644531 26 25 L 26 9 L 27 9 L 27 7 L 21 7 L 21 6 C 21 5.476563 20.816406 4.941406 20.4375 4.5625 C 20.058594 4.183594 19.523438 4 19 4 Z M 15 6 L 19 6 L 19 7 L 15 7 Z M 10 9 L 24 9 L 24 25 C 24 25.554688 23.554688 26 23 26 L 11 26 C 10.445313 26 10 25.554688 10 25 Z M 12 12 L 12 23 L 14 23 L 14 12 Z M 16 12 L 16 23 L 18 23 L 18 12 Z M 20 12 L 20 23 L 22 23 L 22 12 Z">
                         </path>
@@ -77,7 +82,7 @@
                 <li *ngFor="let comment of post.visibleComments" class="bg-gray-100 p-3 rounded-lg shadow-sm">
                     <p class="text-gray-800 text-sm">{{ comment.content }}</p>
                     <p class="text-xs text-gray-500 mt-1">
-                        - {{ comment.user_id }}, {{ comment.created_at | date: 'short' }}
+                        - {{ comment.user_data.full_name }}, {{ comment.created_at | date: 'short' }}
                     </p>
                 </li>
             </ul>
@@ -100,5 +105,24 @@
                 </button>
             </div>
         </div>
+    </div>
+    <!-- Pagination Section -->
+    <div class="flex justify-between items-center mt-8">
+        <!-- Previous Page Button -->
+        <button [disabled]="page <= 1" (click)="changePage(page - 1)"
+            class="bg-gray-200 text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-300 disabled:opacity-50 disabled:cursor-not-allowed">
+            Previous
+        </button>
+
+        <!-- Current Page Display -->
+        <div class="text-gray-600 text-sm">
+            Page {{ page }}
+        </div>
+
+        <!-- Next Page Button -->
+        <button (click)="changePage(page + 1)"
+            class="bg-orange-500 text-white px-4 py-2 rounded-lg hover:bg-orange-600">
+            Next
+        </button>
     </div>
 </div>
