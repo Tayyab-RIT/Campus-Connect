@@ -1,82 +1,73 @@
+/* Navbar container */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  background-color: #f36e21;
+  color: white;
+}
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
-  }
-  
-  /* Navbar container */
-  .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 20px;
-    background-color: #111;
-    color: white;
-  }
-  
-  .navbar .logo {
-    font-size: 24px;
-    font-weight: bold;
-    color: orange;
-  }
-  
-  /* Navbar links */
-  .nav-links ul {
-    display: flex;
-    list-style-type: none;
-  }
-  
-  .nav-links ul li {
-    margin-right: 20px;
-    position: relative;
-  }
-  
-  .nav-links ul li a {
-    text-decoration: none;
-    color: white;
-    font-size: 18px;
-    padding: 10px 15px;
-    transition: background-color 0.3s ease;
-  }
-  
-  .nav-links ul li a:hover {
-    background-color: orange;
-  }
-  
-  /* Dropdown menu for 'Services' and 'Profile' */
-  .nav-links ul li .dropdown {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background-color: #111;
-    border: 1px solid #333;
-    padding: 10px 0;
-    min-width: 180px;
-  }
-  
-  .nav-links ul li:hover .dropdown {
-    display: block;
-  }
-  
-  .dropdown li {
-    padding: 10px;
-  }
-  
-  .dropdown li a {
-    color: white;
-    padding: 10px 15px;
-    display: block;
-  }
-  
-  .dropdown li a:hover {
-    background-color: orange;
-  }
-  
-  /* Main content area */
-  main {
-    padding: 20px;
-  }
-  
+.navbar .logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: white;
+}
+
+/* Navbar links */
+.nav-links ul {
+  display: flex;
+  list-style-type: none;
+}
+
+.nav-links ul li {
+  margin-right: 20px;
+  position: relative;
+}
+
+.nav-links ul li a {
+  text-decoration: none;
+  color: white;
+  font-size: 18px;
+  padding: 10px 15px;
+  transition: background-color 0.3s ease;
+}
+
+.nav-links ul li a:hover {
+  background-color: orange;
+}
+
+/* Dropdown menu for 'Services' and 'Profile' */
+.nav-links ul li .dropdown {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #111;
+  border: 1px solid #333;
+  padding: 10px 0;
+  min-width: 180px;
+}
+
+.nav-links ul li:hover .dropdown {
+  display: block;
+}
+
+.dropdown li {
+  padding: 10px;
+}
+
+.dropdown li a {
+  color: white;
+  padding: 10px 15px;
+  display: block;
+}
+
+.dropdown li a:hover {
+  background-color: orange;
+}
+
+/* Main content area */
+main {
+  padding: 20px;
+}
