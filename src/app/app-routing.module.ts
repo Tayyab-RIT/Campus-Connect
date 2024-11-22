@@ -12,6 +12,7 @@ import { authRedirectGuard } from './auth-redirect.guard';
 import { PublicPortfolioComponent } from './public-portfolio/public-portfolio.component';
 import { FeedComponent } from './pages/feed/feed.component';
 import { TutoringComponent } from './pages/tutoring/tutoring.component';
+import { ServicesComponent } from './pages/services/services.component';
 
 const routes: Routes = [
   { path: 'profile/:username', component: PublicPortfolioComponent }, // Dynamic route
@@ -36,6 +37,11 @@ const routes: Routes = [
     path: '',
     component: MainLayoutComponent,
     children: [
+      {
+        path: 'services',
+        component: ServicesComponent,
+        canActivate: [authGuard],
+      },
       {
         path: 'tutoring',
         component: TutoringComponent,

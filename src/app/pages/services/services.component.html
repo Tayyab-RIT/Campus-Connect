@@ -1,1 +1,80 @@
-<p>services works!</p>
+<div class="max-w-6xl mx-auto mt-6 space-y-8">
+    <!-- Title -->
+    <h1 class="text-3xl font-bold text-gray-800 text-center mb-8">Services & Resources</h1>
+
+    <!-- Custom Links Section -->
+    <div class="space-y-6">
+        <h2 class="text-2xl font-semibold text-gray-700">Useful Links</h2>
+        <ul class="space-y-4">
+            <li>
+                <a href="https://www.example.com/gpa-calculator" target="_blank"
+                    class="text-orange-500 hover:underline">
+                    GPA Calculator
+                </a>
+            </li>
+            <li>
+                <a href="https://www.example.com/my-courses" target="_blank" class="text-orange-500 hover:underline">
+                    My Courses
+                </a>
+            </li>
+            <li>
+                <a href="https://www.example.com/rights-and-policies" target="_blank"
+                    class="text-orange-500 hover:underline">
+                    Rights and Policies
+                </a>
+            </li>
+            <li>
+                <a href="https://www.example.com/university-services" target="_blank"
+                    class="text-orange-500 hover:underline">
+                    University Services
+                </a>
+            </li>
+            <li>
+                <a href="https://www.example.com/custom-link" target="_blank" class="text-orange-500 hover:underline">
+                    Add Your Own Link Here
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Professors' Information Table -->
+    <div class="space-y-4">
+        <h2 class="text-2xl font-semibold text-gray-700">Professors' Information</h2>
+        <p class="text-gray-600">
+            Below is the list of professors, their office hours, and the locations of their offices:
+        </p>
+
+        <!-- Search Bar -->
+        <div class="mb-4">
+            <input type="text" [(ngModel)]="searchTerm" (input)="filterProfessors()"
+                placeholder="Search Professors, Office, or Location..."
+                class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-orange-500" />
+        </div>
+
+        <!-- Table -->
+        <div class="overflow-x-auto">
+            <table class="table-auto w-full border-collapse border border-gray-300">
+                <thead class="bg-gray-100">
+                    <tr>
+                        <th class="border border-gray-300 px-4 py-2 text-left">Professor</th>
+                        <th class="border border-gray-300 px-4 py-2 text-left">Office</th>
+                        <th class="border border-gray-300 px-4 py-2 text-left">Office Hours</th>
+                        <th class="border border-gray-300 px-4 py-2 text-left">Location</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let professor of filteredProfessors">
+                        <td class="border border-gray-300 px-4 py-2">{{ professor.name }}</td>
+                        <td class="border border-gray-300 px-4 py-2">{{ professor.office }}</td>
+                        <td class="border border-gray-300 px-4 py-2">{{ professor.hours }}</td>
+                        <td class="border border-gray-300 px-4 py-2">{{ professor.location }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <p *ngIf="filteredProfessors.length === 0" class="text-center text-gray-500">
+            No results found.
+        </p>
+    </div>
+</div>
