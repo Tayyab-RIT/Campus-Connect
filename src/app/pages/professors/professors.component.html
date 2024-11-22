@@ -26,6 +26,7 @@
                         <th class="border border-gray-300 px-4 py-2 text-left">Office Hours</th>
                         <th class="border border-gray-300 px-4 py-2 text-left">Location</th>
                         <th class="border border-gray-300 px-4 py-2 text-left">Email</th>
+                        <th class="border border-gray-300 px-4 py-2 text-left">Schedule Meeting</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -41,6 +42,12 @@
                         <td class="border border-gray-300 px-4 py-2">
                             <a [href]="'mailto:' + professor.email" class="text-orange-500 hover:underline">{{
                                 professor.email }}</a>
+                        </td>
+                        <td class="border border-gray-300 px-4 py-2">
+                            <button class="bg-orange-500 text-white px-4 py-2 rounded-lg hover:bg-orange-600"
+                                (click)="scheduleMeeting(professor)">
+                                Schedule Meeting
+                            </button>
                         </td>
                     </tr>
                 </tbody>

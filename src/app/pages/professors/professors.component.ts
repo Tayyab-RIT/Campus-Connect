@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../../auth.service';
 
 @Component({
   selector: 'app-professors',
   templateUrl: './professors.component.html',
-  styleUrl: './professors.component.css',
+  styleUrls: ['./professors.component.css'],
 })
 export class ProfessorsComponent implements OnInit {
+  studentName: string = ''; // Store the student's name
+  studentEmail: string = ''; // Store the student's email
   searchTerm: string = '';
   professors = [
     {
@@ -78,6 +81,22 @@ export class ProfessorsComponent implements OnInit {
   ngOnInit(): void {
     // Initialize filteredProfessors with all professors
     this.filteredProfessors = [...this.professors];
+    this.loadStudentProfile();
+  }
+
+  constructor(private auth: AuthService) {}
+
+  loadStudentProfile(): void {
+    this.auth.getProfile().subscribe({
+      next: (response) => {
+        this.studentName = response.data.full_name;
+        this.studentEmail = response.data.email; // Assuming `email` is in the response
+        console.log('Student Profile:', response);
+      },
+      error: (err) => {
+        console.error('Failed to load student profile:', err);
+      },
+    });
   }
 
   filterProfessors(): void {
@@ -94,5 +113,22 @@ export class ProfessorsComponent implements OnInit {
         professor.email.toLowerCase().includes(search)
       );
     });
+  }
+
+  scheduleMeeting(professor: any): void {
+    const subject = `Request for Meeting with ${professor.name}`;
+    const body = `Dear ${professor.name},\n\nThis is ${
+      this.studentName
+    }, and I would like to request a meeting during your office hours.\n\nOffice: ${
+      professor.office
+    }\nLocation: ${professor.location}\nAvailable Hours: ${professor.hours.map(
+      (hour: any) => `${hour.day}: ${hour.time}`
+    )}.\n\nThank you.\n\nBest regards,\n${this.studentName}`;
+
+    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${
+      professor.email
+    }&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+    window.location.href = gmailUrl;
   }
 }
