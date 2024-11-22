@@ -1,80 +1,133 @@
-<div class="max-w-6xl mx-auto mt-6 space-y-8">
+<div class="max-w-6xl mx-auto mt-6 space-y-8 pb-16">
     <!-- Title -->
     <h1 class="text-3xl font-bold text-gray-800 text-center mb-8">Services & Resources</h1>
 
     <!-- Custom Links Section -->
     <div class="space-y-6">
-        <h2 class="text-2xl font-semibold text-gray-700">Useful Links</h2>
-        <ul class="space-y-4">
-            <li>
-                <a href="https://www.example.com/gpa-calculator" target="_blank"
-                    class="text-orange-500 hover:underline">
-                    GPA Calculator
-                </a>
-            </li>
-            <li>
-                <a href="https://www.example.com/my-courses" target="_blank" class="text-orange-500 hover:underline">
-                    My Courses
-                </a>
-            </li>
-            <li>
-                <a href="https://www.example.com/rights-and-policies" target="_blank"
-                    class="text-orange-500 hover:underline">
-                    Rights and Policies
-                </a>
-            </li>
-            <li>
-                <a href="https://www.example.com/university-services" target="_blank"
-                    class="text-orange-500 hover:underline">
-                    University Services
-                </a>
-            </li>
-            <li>
-                <a href="https://www.example.com/custom-link" target="_blank" class="text-orange-500 hover:underline">
-                    Add Your Own Link Here
-                </a>
-            </li>
-        </ul>
-    </div>
+        <h2 class="text-2xl font-semibold text-gray-700 mb-4">Services For You</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            <div
+                class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition duration-300 ease-in-out">
+                <img src="https://media.geeksforgeeks.org/wp-content/uploads/20230922153303/Screenshot-2023-09-22-153223.png"
+                    alt="GPA Calculator" class="w-full h-40 object-cover" />
+                <div class="p-4">
+                    <h3 class="text-lg font-semibold text-gray-800">GPA Calculator</h3>
+                    <p class="text-sm text-gray-600 mt-2">
+                        Quickly calculate your GPA using this handy tool.
+                    </p>
+                    <a href="https://tigercenter.rit.edu/tigerCenterApp/api/gpa-calc" target="_blank"
+                        class="block mt-4 text-orange-500 font-semibold hover:underline">
+                        Visit Now →
+                    </a>
+                </div>
+            </div>
 
-    <!-- Professors' Information Table -->
-    <div class="space-y-4">
-        <h2 class="text-2xl font-semibold text-gray-700">Professors' Information</h2>
-        <p class="text-gray-600">
-            Below is the list of professors, their office hours, and the locations of their offices:
-        </p>
+            <div
+                class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition duration-300 ease-in-out">
+                <img src="professors.png" alt="GPA Calculator" class="w-full h-40 object-cover" />
+                <div class="p-4">
+                    <h3 class="text-lg font-semibold text-gray-800">Professors</h3>
+                    <p class="text-sm text-gray-600 mt-2">
+                        Quickly find your professors' contact information and office hours.
+                    </p>
+                    <a href="/professors" target="_blank"
+                        class="block mt-4 text-orange-500 font-semibold hover:underline">
+                        Visit Now →
+                    </a>
+                </div>
+            </div>
 
-        <!-- Search Bar -->
-        <div class="mb-4">
-            <input type="text" [(ngModel)]="searchTerm" (input)="filterProfessors()"
-                placeholder="Search Professors, Office, or Location..."
-                class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-orange-500" />
+            <div
+                class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition duration-300 ease-in-out">
+                <img src="professors.png" alt="GPA Calculator" class="w-full h-40 object-cover" />
+                <div class="p-4">
+                    <h3 class="text-lg font-semibold text-gray-800">Tutoring</h3>
+                    <p class="text-sm text-gray-600 mt-2">
+                        Book a tutoring session with a tutor for any of your courses.
+                    </p>
+                    <a href="/tutoring" target="_blank"
+                        class="block mt-4 text-orange-500 font-semibold hover:underline">
+                        Visit Now →
+                    </a>
+                </div>
+            </div>
+
+            <div
+                class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition duration-300 ease-in-out">
+                <img src="https://moodle.com/wp-content/uploads/2023/02/Moodle-Workplace-4.0-Learner-Journey-0-23-screenshot.png"
+                    alt="My Courses" class="w-full h-40 object-cover" />
+                <div class="p-4">
+                    <h3 class="text-lg font-semibold text-gray-800">My Courses</h3>
+                    <p class="text-sm text-gray-600 mt-2">
+                        View and manage all your registered courses in one place.
+                    </p>
+                    <a href="https://mycourses.rit.edu/" target="_blank"
+                        class="block mt-4 text-orange-500 font-semibold hover:underline">
+                        Visit Now →
+                    </a>
+                </div>
+            </div>
+
+            <div
+                class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition duration-300 ease-in-out">
+                <img src="https://www.rit.edu/sites/rit.edu/files/images/paragraph/image-card/screenshot-myRIT-2x.jpg"
+                    alt="Rights and Policies" class="w-full h-40 object-cover" />
+                <div class="p-4">
+                    <h3 class="text-lg font-semibold text-gray-800">My RIT</h3>
+                    <p class="text-sm text-gray-600 mt-2">
+                        Access your personal information, grades, and more.
+                    </p>
+                    <a href="https://www.rit.edu/myrit/home" target="_blank"
+                        class="block mt-4 text-orange-500 font-semibold hover:underline">
+                        Visit Now →
+                    </a>
+                </div>
+            </div>
+
+            <div
+                class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition duration-300 ease-in-out">
+                <img src="sis.png" alt="University Services" class="w-full h-40 object-cover" />
+                <div class="p-4">
+                    <h3 class="text-lg font-semibold text-gray-800">Student Information System</h3>
+                    <p class="text-sm text-gray-600 mt-2">
+                        Manage your personal information, course registration, grades and more.
+                    </p>
+                    <a href="https://campus.ps.rit.edu/" target="_blank"
+                        class="block mt-4 text-orange-500 font-semibold hover:underline">
+                        Visit Now →
+                    </a>
+                </div>
+            </div>
+
+            <div
+                class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition duration-300 ease-in-out">
+                <img src="calendar.png" alt="Custom Link" class="w-full h-40 object-cover" />
+                <div class="p-4">
+                    <h3 class="text-lg font-semibold text-gray-800">Academic Calendar</h3>
+                    <p class="text-sm text-gray-600 mt-2">
+                        Stay up-to-date with important academic dates and deadlines.
+                    </p>
+                    <a href="https://www.rit.edu/calendar" target="_blank"
+                        class="block mt-4 text-orange-500 font-semibold hover:underline">
+                        Visit Now →
+                    </a>
+                </div>
+            </div>
+            <div
+                class="bg-white rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition duration-300 ease-in-out">
+                <img src="helprit.png" alt="Custom Link" class="w-full h-40 object-cover" />
+                <div class="p-4">
+                    <h3 class="text-lg font-semibold text-gray-800">Help RIT</h3>
+                    <p class="text-sm text-gray-600 mt-2">
+                        Request for help with any technical issues you may be facing, or find answers to common
+                        questions.
+                    </p>
+                    <a href="https://help.rit.edu/" target="_blank"
+                        class="block mt-4 text-orange-500 font-semibold hover:underline">
+                        Visit Now →
+                    </a>
+                </div>
+            </div>
         </div>
-
-        <!-- Table -->
-        <div class="overflow-x-auto">
-            <table class="table-auto w-full border-collapse border border-gray-300">
-                <thead class="bg-gray-100">
-                    <tr>
-                        <th class="border border-gray-300 px-4 py-2 text-left">Professor</th>
-                        <th class="border border-gray-300 px-4 py-2 text-left">Office</th>
-                        <th class="border border-gray-300 px-4 py-2 text-left">Office Hours</th>
-                        <th class="border border-gray-300 px-4 py-2 text-left">Location</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let professor of filteredProfessors">
-                        <td class="border border-gray-300 px-4 py-2">{{ professor.name }}</td>
-                        <td class="border border-gray-300 px-4 py-2">{{ professor.office }}</td>
-                        <td class="border border-gray-300 px-4 py-2">{{ professor.hours }}</td>
-                        <td class="border border-gray-300 px-4 py-2">{{ professor.location }}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <p *ngIf="filteredProfessors.length === 0" class="text-center text-gray-500">
-            No results found.
-        </p>
     </div>
 </div>

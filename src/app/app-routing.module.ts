@@ -13,6 +13,7 @@ import { PublicPortfolioComponent } from './public-portfolio/public-portfolio.co
 import { FeedComponent } from './pages/feed/feed.component';
 import { TutoringComponent } from './pages/tutoring/tutoring.component';
 import { ServicesComponent } from './pages/services/services.component';
+import { ProfessorsComponent } from './pages/professors/professors.component';
 
 const routes: Routes = [
   { path: 'profile/:username', component: PublicPortfolioComponent }, // Dynamic route
@@ -40,6 +41,11 @@ const routes: Routes = [
       {
         path: 'services',
         component: ServicesComponent,
+        canActivate: [authGuard],
+      },
+      {
+        path: 'professors',
+        component: ProfessorsComponent,
         canActivate: [authGuard],
       },
       {

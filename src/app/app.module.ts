@@ -21,6 +21,7 @@ import { PublicPortfolioComponent } from './public-portfolio/public-portfolio.co
 import { FeedComponent } from './pages/feed/feed.component';
 import { TutoringComponent } from './pages/tutoring/tutoring.component';
 import { ServicesComponent } from './pages/services/services.component';
+import { ProfessorsComponent } from './pages/professors/professors.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { ServicesComponent } from './pages/services/services.component';
     FeedComponent,
     TutoringComponent,
     ServicesComponent,
+    ProfessorsComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [provideHttpClient(withInterceptorsFromDi())],
