@@ -200,4 +200,30 @@ export class AuthService {
         })
       );
   }
+
+  /**
+   * Create a new post
+   * @param postData Post content and image (optional)
+   * @returns Observable with the created post data
+   */
+  createPost(postData: any): Observable<any> {
+    return this.http
+      .post(`${this.apiUrl}/create-post`, postData, {
+        headers: this.getAuthHeaders({
+          // Use multipart form-data for file uploads
+          Accept: 'application/json',
+        }),
+      })
+      .pipe(
+        tap((response: any) => {
+          console.log('Post created successfully:', response);
+        })
+      );
+  }
+
+  deletePost(postId: string): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/delete-post/${postId}`, {
+      headers: this.getAuthHeaders(),
+    });
+  }
 }

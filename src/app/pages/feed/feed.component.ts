@@ -5,7 +5,7 @@ import { AuthService } from '../../auth.service';
 @Component({
   selector: 'app-feed',
   templateUrl: './feed.component.html',
-  styleUrl: './feed.component.css',
+  styleUrls: ['./feed.component.css'],
 })
 export class FeedComponent implements OnInit {
   posts: any[] = [];
@@ -14,6 +14,11 @@ export class FeedComponent implements OnInit {
   page: number = 1;
   filter: string | null = null;
 
+  // Admin post creation
+  isAdmin: boolean = false;
+  newPostContent: string = '';
+  newPostImage: File | null = null;
+
   constructor(
     private route: ActivatedRoute,
     private auth: AuthService,
@@ -21,7 +26,6 @@ export class FeedComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    // Listen to route parameter and query parameter changes
     this.route.params.subscribe((params) => {
       this.page = +params['page']; // Get the page number
       this.loadFeed();
@@ -30,6 +34,16 @@ export class FeedComponent implements OnInit {
     this.route.queryParams.subscribe((queryParams) => {
       this.filter = queryParams['filter']; // Get the filter value
       this.loadFeed();
+    });
+
+    // Check if the user is an admin
+    this.auth.getUser().subscribe({
+      next: (user) => {
+        this.isAdmin = user.data.is_admin;
+      },
+      error: (error) => {
+        console.error('Error checking admin status:', error);
+      },
     });
   }
 
@@ -70,7 +84,54 @@ export class FeedComponent implements OnInit {
     });
   }
 
-  // Show more comments for a specific post
+  createPost() {
+    if (!this.newPostContent.trim() && !this.newPostImage) {
+      alert('Post content or image is required.');
+      return;
+    }
+
+    // if (this.newPostImage) {
+    // Convert the image to Base64
+    // const reader = new FileReader();
+    // reader.onload = () => {
+    //   const base64Image = reader.result as string; // Base64-encoded image
+    //   const payload = {
+    //     content: this.newPostContent,
+    //     image: base64Image, // Attach Base64 image
+    //   };
+
+    //   this.sendPostToBackend(payload);
+    // };
+    // reader.onerror = () => {
+    //   alert('Failed to read the image file.');
+    // };
+
+    // reader.readAsDataURL(this.newPostImage); // Read image as Base64
+    // } else {
+    // If no image, just send the content
+    const payload = {
+      content: this.newPostContent,
+      image: this.newPostImage,
+    };
+    this.sendPostToBackend(payload);
+    // }
+  }
+
+  sendPostToBackend(payload: { content: string; image: File | null }) {
+    this.auth.createPost(payload).subscribe({
+      next: () => {
+        alert('Post created successfully!');
+        this.newPostContent = '';
+        this.newPostImage = null;
+        this.loadFeed(); // Reload feed to show the new post
+      },
+      error: (err) => {
+        console.error('Error creating post:', err);
+        alert('Failed to create post. Please try again.');
+      },
+    });
+  }
+
   showMoreComments(post: any) {
     const currentLength = post.visibleComments.length;
     const moreComments = post.comment.slice(currentLength, currentLength + 2); // Load 2 more comments
@@ -85,26 +146,22 @@ export class FeedComponent implements OnInit {
         if (!post) return;
 
         if (post.likedByUser) {
-          // User has already liked the post, remove like
           this.auth.removeLike(postId).subscribe({
             next: () => {
-              post.likedByUser = false; // Update the likedByUser property immediately
+              post.likedByUser = false;
               post.like = post.like.filter(
                 (like: { user_id: any }) => like.user_id !== userId
-              ); // Remove the like
-              console.log(`Like removed for post ${postId}`);
+              );
             },
             error: (error) => {
               console.error('Error removing like:', error);
             },
           });
         } else {
-          // User hasn't liked the post yet, add like
           this.auth.addLike(postId).subscribe({
-            next: (newLike) => {
-              post.likedByUser = true; // Update the likedByUser property immediately
-              post.like = [...post.like, { user_id: userId }]; // Add the new like to the likes array
-              console.log(`Like added for post ${postId}`);
+            next: () => {
+              post.likedByUser = true;
+              post.like = [...post.like, { user_id: userId }];
             },
             error: (error) => {
               console.error('Error adding like:', error);
@@ -118,23 +175,6 @@ export class FeedComponent implements OnInit {
     });
   }
 
-  hasUserLiked(post: any): boolean {
-    console.log('HERE');
-
-    this.auth.getUser().subscribe({
-      next: (user) => {
-        const userId = user.data.id;
-        return post.like?.some(
-          (like: { user_id: any }) => like.user_id === userId
-        );
-      },
-      error: (error) => {
-        console.error('Error fetching user ID:', error);
-      },
-    });
-    return false;
-  }
-
   addComment(postId: string, commentContent: string) {
     if (!commentContent.trim()) {
       console.error('Comment cannot be empty');
@@ -145,20 +185,15 @@ export class FeedComponent implements OnInit {
       next: (newComment) => {
         const post = this.posts.find((p) => p.id === postId);
         if (post) {
-          console.log('POST COMMENTS IS', post.comment);
-          console.log('NEW COMEMNT IS', newComment);
-
-          // Add the new comment to the comments array with the correct structure
           post.comment = [
             ...post.comment,
             {
-              id: newComment.data.id, // Use the ID returned by the backend
-              user_id: newComment.data.user_id, // Ensure user_id is included
-              content: commentContent, // Use the submitted content
-              created_at: new Date().toISOString(), // Add the current timestamp
+              id: newComment.data.id,
+              user_id: newComment.data.user_id,
+              content: commentContent,
+              created_at: new Date().toISOString(),
             },
           ];
-          console.log(`Comment added to post ${postId}`);
         }
       },
       error: (error) => {
@@ -169,5 +204,27 @@ export class FeedComponent implements OnInit {
 
   onSearch(filter: string) {
     this.router.navigate(['/feed', 1], { queryParams: { filter } });
+  }
+
+  onImageSelected(event: any) {
+    const file: File = event.target.files[0];
+    if (file) {
+      this.newPostImage = file;
+    }
+  }
+
+  deletePost(postId: string): void {
+    if (confirm('Are you sure you want to delete this post?')) {
+      this.auth.deletePost(postId).subscribe({
+        next: () => {
+          alert('Post deleted successfully.');
+          this.posts = this.posts.filter((post) => post.id !== postId); // Update the local posts array
+        },
+        error: (err) => {
+          console.error('Error deleting post:', err);
+          alert('Failed to delete the post. Please try again.');
+        },
+      });
+    }
   }
 }
