@@ -1,13 +1,120 @@
-<section class="hero">
-    <img src="/image.png" alt="Campus Image">
-    <div class="hero-text">
-        <h2>Discover a new way to connect, learn, and grow.</h2>
-        <p>Stay informed about the latest events, deadlines, and campus news. Create your own profile and tailor your
-            feed to your interests. Join clubs, find study buddies, and network with fellow students.</p>
-        <button>Join Now</button>
+<section class="hero bg-gray-900 text-white relative overflow-hidden">
+    <!-- Campus Image with Overlay -->
+    <div class="absolute top-0 left-0 w-full h-full">
+        <img src="/campus.jpg" alt="Campus Image" class="w-full h-full object-cover pointer-events-none" />
+        <div class="absolute top-0 left-0 w-full h-full bg-black bg-opacity-60"></div>
+    </div>
+
+    <!-- Hero Content -->
+    <div class="relative z-10 max-w-6xl mx-auto px-6 py-20 text-center">
+        <h1 class="text-4xl md:text-6xl font-extrabold mb-6 leading-tight text-white">
+            Connect. Learn. Grow.
+        </h1>
+        <p class="text-lg md:text-xl font-light mb-8 text-gray-300">
+            Campus Connect is your all-in-one platform to stay informed, collaborate with peers, and excel in your
+            academic journey. Create a profile, join clubs, network, and discover endless possibilities.
+        </p>
+        <a href="/signup"
+            class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-8 rounded-lg text-lg shadow-lg">
+            Join Now
+        </a>
     </div>
 </section>
 
-<footer>
-    <p>&copy; 2023 Campus Connect</p>
+
+<section class="features py-16 bg-gray-100">
+    <div class="max-w-6xl mx-auto px-6">
+        <h2 class="text-3xl md:text-4xl font-extrabold text-gray-800 text-center mb-12">
+            Why Choose Campus Connect?
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Feature 1 -->
+            <div class="feature bg-white shadow-lg rounded-lg p-6 text-center">
+                <img src="/images/connection.svg" alt="Connect" class="w-20 mx-auto mb-4">
+                <h3 class="text-xl font-bold text-gray-800 mb-2">Stay Connected</h3>
+                <p class="text-gray-600">
+                    Never miss an event or update. Tailor your feed to your interests and get the latest campus news and
+                    events.
+                </p>
+            </div>
+            <!-- Feature 2 -->
+            <div class="feature bg-white shadow-lg rounded-lg p-6 text-center">
+                <img src="/images/clubs.svg" alt="Clubs" class="w-20 mx-auto mb-4">
+                <h3 class="text-xl font-bold text-gray-800 mb-2">Join Communities</h3>
+                <p class="text-gray-600">
+                    Discover and join clubs, meet study buddies, and network with fellow students across the campus.
+                </p>
+            </div>
+            <!-- Feature 3 -->
+            <div class="feature bg-white shadow-lg rounded-lg p-6 text-center">
+                <img src="/images/academic.svg" alt="Learn" class="w-20 mx-auto mb-4">
+                <h3 class="text-xl font-bold text-gray-800 mb-2">Achieve More</h3>
+                <p class="text-gray-600">
+                    Enhance your learning experience with personalized resources, tutoring, and academic tools.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="how-it-works py-16 bg-white">
+    <div class="max-w-6xl mx-auto px-6">
+        <h2 class="text-3xl md:text-4xl font-extrabold text-gray-800 text-center mb-12">
+            How It Works
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Step 1 -->
+            <div class="step text-center">
+                <div
+                    class="w-16 h-16 bg-orange-500 text-white rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span class="text-xl font-bold">1</span>
+                </div>
+                <h3 class="text-xl font-bold text-gray-800 mb-2">Create Your Profile</h3>
+                <p class="text-gray-600">
+                    Sign up, set up your profile, and start personalizing your feed with your interests.
+                </p>
+            </div>
+            <!-- Step 2 -->
+            <div class="step text-center">
+                <div
+                    class="w-16 h-16 bg-orange-500 text-white rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span class="text-xl font-bold">2</span>
+                </div>
+                <h3 class="text-xl font-bold text-gray-800 mb-2">Connect and Explore</h3>
+                <p class="text-gray-600">
+                    Join clubs, attend events, and find study buddies to collaborate with.
+                </p>
+            </div>
+            <!-- Step 3 -->
+            <div class="step text-center">
+                <div
+                    class="w-16 h-16 bg-orange-500 text-white rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span class="text-xl font-bold">3</span>
+                </div>
+                <h3 class="text-xl font-bold text-gray-800 mb-2">Achieve Your Goals</h3>
+                <p class="text-gray-600">
+                    Use academic resources, tutoring, and networking to excel in your studies.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="cta py-16 bg-gray-900 text-white text-center">
+    <div class="max-w-6xl mx-auto px-6">
+        <h2 class="text-3xl md:text-4xl font-extrabold mb-6">Ready to Get Started?</h2>
+        <p class="text-lg mb-8">
+            Join Campus Connect today and start building meaningful connections, exploring opportunities, and unlocking
+            your potential!
+        </p>
+        <a href="/signup" class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-8 rounded-lg text-lg">
+            Sign Up Now
+        </a>
+    </div>
+</section>
+
+<footer class="bg-gray-100 py-6">
+    <div class="max-w-6xl mx-auto px-6 text-center">
+        <p class="text-gray-600 text-sm">&copy; 2023 Campus Connect. All rights reserved.</p>
+    </div>
 </footer>
