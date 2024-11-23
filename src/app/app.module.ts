@@ -22,6 +22,7 @@ import { FeedComponent } from './pages/feed/feed.component';
 import { TutoringComponent } from './pages/tutoring/tutoring.component';
 import { ServicesComponent } from './pages/services/services.component';
 import { ProfessorsComponent } from './pages/professors/professors.component';
+import { QrCodeModule } from 'ng-qrcode';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,7 @@ import { ProfessorsComponent } from './pages/professors/professors.component';
     ServicesComponent,
     ProfessorsComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule],
+  imports: [BrowserModule, AppRoutingModule, FormsModule, QrCodeModule],
   providers: [provideHttpClient(withInterceptorsFromDi())],
   bootstrap: [AppComponent],
 })

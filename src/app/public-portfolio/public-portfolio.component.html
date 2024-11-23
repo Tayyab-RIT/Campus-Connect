@@ -175,6 +175,10 @@
             {{ profileData.is_tutor ? 'Available for tutoring sessions!' : 'Not available for tutoring.' }}
         </p>
     </div>
+    <div class="w-full flex justify-center items-center">
+        <qr-code [value]="'https://localhost:4200/profile/' + profileData.username" size="300"
+            errorCorrectionLevel="M" />
+    </div>
 </div>
 
 <div *ngIf="errorMessage" class="text-red-500 text-center mt-4">{{ errorMessage }}</div>
