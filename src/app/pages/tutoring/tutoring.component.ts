@@ -54,18 +54,19 @@ export class TutoringComponent implements OnInit {
   loadSlots() {
     this.auth.getUser().subscribe({
       next: (userResponse: any) => {
-        const userId = userResponse.data.id; // Get the logged-in user's ID
+        const userId = userResponse.data.user_id; // Get the logged-in user's ID
 
         this.auth.getTutorSlots().subscribe({
           next: (response: { slots: any[] }) => {
             this.slots = response.slots.map((slot: any) => ({
               ...slot,
               tutor_full_name: slot.user_data?.full_name || slot.tutor_id,
-              isBooked: slot.tutor_bookings?.some(
+              isBooked: slot.tutor_booking?.some(
                 (booking: { student_id: string }) =>
                   booking.student_id === userId
               ),
             }));
+            console.log('Slots:', this.slots);
           },
           error: (err: any) => console.error('Error fetching slots:', err),
         });

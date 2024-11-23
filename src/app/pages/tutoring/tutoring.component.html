@@ -88,8 +88,9 @@
                 <!-- Book Slot Button -->
                 <button
                     class="w-full bg-orange-500 text-white px-4 py-2 rounded-lg hover:bg-orange-600 disabled:bg-gray-400 disabled:cursor-not-allowed"
-                    [disabled]="isTutor || slot.current_students >= slot.max_students" (click)="bookSlot(slot.id)">
-                    Book Slot
+                    [disabled]="isTutor || slot.current_students >= slot.max_students || slot.isBooked"
+                    (click)="bookSlot(slot.id)">
+                    {{ slot.isBooked ? 'Booked' : 'Book Slot' }}
                 </button>
             </div>
         </div>
