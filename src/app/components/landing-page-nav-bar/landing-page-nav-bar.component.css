@@ -44,7 +44,7 @@
 }
 
 .nav-links ul li a:hover {
-  background-color: orange;
+  background-color:rgb(249 115 22);
   border-radius: 5px;
 }
 
@@ -65,20 +65,20 @@
 
 .btn-signin {
   background-color: transparent;
-  border: 2px solid orange;
-  color: orange;
+  border: 2px solid rgb(249 115 22);
+  color:rgb(249 115 22);
 }
 
 .btn-signin:hover {
-  background-color: orange;
+  background-color:rgb(249 115 22);
   color: white;
 }
 
 .btn-signup {
-  background-color: orange;
+  background-color: rgb(249 115 22);
   color: white;
 }
 
 .btn-signup:hover {
-  background-color: darkorange;
+  background-color: rgb(226, 96, 3);
 }
