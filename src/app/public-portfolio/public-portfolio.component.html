@@ -3,7 +3,7 @@
 <div *ngIf="!isLoading && profileData"
     class="max-w-4xl mx-auto p-8 bg-gradient-to-br from-white via-gray-50 to-gray-100 shadow-lg rounded-lg mt-8">
     <!-- Profile Header -->
-    <div class="flex items-center space-x-6 border-b border-gray-200 pb-6">
+    <div class="flex items-center space-x-6 border-b border-gray-300 pb-6">
         <img *ngIf="profileData.profile_picture" [src]="profileData.profile_picture" alt="{{ profileData.full_name }}"
             class="w-28 h-28 rounded-full shadow-lg ring-4 ring-orange-500" />
         <div>
